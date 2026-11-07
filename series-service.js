@@ -51,3 +51,50 @@ export const sortByStartYear = (series) => {
 };
 
 
+export const renameSeries = (series, id, newTitle) => {
+    return series.map(show => {
+        if (show.id === id) {
+            return { ...show, title: newTitle };
+        }
+
+        return show;
+    });
+};
+
+export const addSeason = (series, showId, season) => {
+    return series.map(show => {
+        if (show.id === showId) {
+            return {
+                ...show,
+                seasons: [...show.seasons, season]
+            };
+        }
+
+        return show;
+    });
+};
+
+
+export const addEpisode = (series, showId, seasonNumber, episode) => {
+    return series.map(show => {
+        if (show.id === showId) {
+            return {
+                ...show,
+                seasons: show.seasons.map(season => {
+                    if (season.number === seasonNumber) {
+                        return {
+                            ...season,
+                            episodes: [...season.episodes, episode]
+                        };
+                    }
+
+                    return season;
+                })
+            };
+        }
+
+        return show;
+    });
+};
+
+
